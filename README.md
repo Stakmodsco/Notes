@@ -1,81 +1,87 @@
-mike@Mikes-MacBook-Pro frontend % cat .env.example
-# SafeGuard frontend environment variables
-# Copy to .env for local development only. Never commit .env.
-#
-# For EAS builds, create the same variables in the EAS environment named
-# development, preview, or production. Values prefixed EXPO_PUBLIC_ are bundled
-# into the client app and must never contain server-side secrets.
-
-# Runtime environment: development | preview | production
-EXPO_PUBLIC_ENV=development
-
-# Public API and authentication configuration
-EXPO_PUBLIC_BACKEND_URL=https://your-api.example.com
-EXPO_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your-public-supabase-anon-key
-
-# RevenueCat public app-specific SDK keys
-# Use Test Store keys only for local/internal testing. Production EAS builds must
-# use the iOS App Store and Android Play Store public SDK keys.
-EXPO_PUBLIC_REVENUECAT_IOS_KEY=appl_your_public_ios_sdk_key
-EXPO_PUBLIC_REVENUECAT_ANDROID_KEY=goog_your_public_android_sdk_key
-
-# Optional Expo/Metro local-development overrides
-EXPO_TUNNEL_SUBDOMAIN=
-EXPO_PACKAGER_HOSTNAME=
-EXPO_PACKAGER_PROXY_URL=
-EXPO_USE_FAST_RESOLVER=1
-METRO_CACHE_ROOT=
-
-# EXPO_TOKEN and store submission credentials belong in CI/EAS credential
-# storage, not in this frontend environment file.
-
-mike@Mikes-MacBook-Pro frontend % sed -n '1,220p' app.config.js
-/**
- * Expo App Configuration
- * 
- * This file dynamically injects environment variables into the app config
- * for both development (expo start) and EAS builds.
- * 
- * EAS builds receive env vars from eas.json build profiles.
- * This config ensures they're accessible via Constants.expoConfig.extra
- */
-
-module.exports = ({ config }) => {
-  require('./scripts/public-config-guard.cjs').assertPublicConfig(process.env, config.extra || {});
-  // Get backend URL from environment (EAS injects these during build)
-  const backendUrl = process.env.EXPO_PUBLIC_BACKEND_URL || 
-                     'https://safeguard-api-rtiu.onrender.com';
-  
-  // Get Supabase config
-  const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || '';
-  const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || '';
-  
-  // Get RevenueCat keys
-  const revenueCatIosKey = process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY || '';
-  const revenueCatAndroidKey = process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY || '';
-  
-  console.log('[app.config.js] Building with:');
-  console.log('  EXPO_PUBLIC_BACKEND_URL:', backendUrl);
-  console.log('  EXPO_PUBLIC_SUPABASE_URL:', supabaseUrl ? 'configured' : 'NOT SET');
-  console.log('  Environment:', process.env.EXPO_PUBLIC_ENV || 'development');
-
-  return {
-    ...config,
-    extra: {
-      ...config.extra,
-      // Inject environment variables into the app
-      EXPO_PUBLIC_BACKEND_URL: backendUrl,
-      EXPO_PUBLIC_SUPABASE_URL: supabaseUrl,
-      EXPO_PUBLIC_SUPABASE_ANON_KEY: supabaseAnonKey,
-      EXPO_PUBLIC_REVENUECAT_IOS_KEY: revenueCatIosKey,
-      EXPO_PUBLIC_REVENUECAT_ANDROID_KEY: revenueCatAndroidKey,
-      EXPO_PUBLIC_ENV: process.env.EXPO_PUBLIC_ENV || 'development',
-      // EAS project config
-      eas: {
-        projectId: 'd64dedd5-e5bb-4bbf-8aa6-01e482e9f295',
-      },
-      router: {},
+mike@Mikes-MacBook-Pro frontend % sed -n '1,240p' scripts/public-config-guard.cjs
+/* Build-time guard: public values are bundled into the app binary. */
+const forbiddenName = /(?:SERVICE_ROLE|SECRET|PRIVATE_KEY|MASTER_KEY|DB_PASSWORD|DATABASE_URL|OPENAI_API_KEY|ANTHROPIC_API_KEY)/i;
+function assertPublicConfig(env, extra = {}) {
+  const publicValues = { ...Object.fromEntries(Object.entries(env).filter(([key]) => key.startsWith('EXPO_PUBLIC_'))), ...extra };
+  for (const [name, value] of Object.entries(publicValues)) {
+    if (!value) continue;
+    if (forbiddenName.test(name)) throw new Error(`Server-only configuration cannot be bundled: ${name}`);
+    if (typeof value === 'object') { assertPublicConfig({}, value); continue; }
+    if (typeof value !== 'string') continue;
+    if (/^(?:sb_secret_|sk_live_|sk_test_|sk-proj-|sk-ant-)/.test(value)) {
+      throw new Error(`Secret-looking value rejected in public configuration: ${name}`);
+    }
+    const parts = value.split('.');
+    if (parts.length === 3) {
+      let role;
+      try { role = JSON.parse(Buffer.from(parts[1], 'base64url').toString()).role; } catch {}
+      if (role === 'service_role') throw new Error(`Service-role key rejected in public configuration: ${name}`);
+    }
+  }
+}
+module.exports = { assertPublicConfig };
+mike@Mikes-MacBook-Pro frontend % cat eas.json
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "environment": "development",
+      "ios": {
+        "simulator": false,
+        "resourceClass": "m-medium"
+      }
     },
-  };
-};
+    "development-simulator": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "environment": "development",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "environment": "preview",
+      "ios": {
+        "simulator": false
+      },
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "testflight": {
+      "distribution": "store",
+      "autoIncrement": true,
+      "environment": "production",
+      "ios": {
+        "resourceClass": "m-medium",
+        "image": "auto"
+      }
+    },
+    "production": {
+      "distribution": "store",
+      "autoIncrement": true,
+      "environment": "production",
+      "ios": {
+        "resourceClass": "m-medium",
+        "image": "auto"
+      },
+      "android": {
+        "buildType": "app-bundle"
+      }
+    }
+  },
+  "submit": {
+    "testflight": {
+      "ios": {
+        "ascAppId": "6772747592"
+      }
+    }
+  }
+}
+mike@Mikes-MacBook-Pro frontend % 
