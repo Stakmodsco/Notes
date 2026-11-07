@@ -1,60 +1,7 @@
-mike@Mikes-MacBook-Pro frontend % touch .env  
-mike@Mikes-MacBook-Pro frontend % nano .env
-
-  UW PICO 5.09                                   File: .env                                    Modified  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-^G Get Help      ^O WriteOut      ^R Read File     ^Y Prev Pg       ^K Cut Text      ^C Cur Pos
-^X Exit          ^J Justify       ^W Where is      ^V Next Pg       ^U UnCut Text    ^T To Spell
-
-
-
-
-
-
-^G Get Help      ^O WriteOut      ^R Read File     ^Y Prev Pg       ^K Cut Text      ^C Cur Pos       
-^X Exit          ^J Justify       ^W Where is      ^V Next Pg       ^U UnCut Text    ^T To Spell      
+for key in EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY; do
+  if grep -qE "^${key}=.+" .env; then
+    echo "$key: CONFIGURED"
+  else
+    echo "$key: MISSING OR EMPTY"
+  fi
+done
