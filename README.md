@@ -1,1 +1,1 @@
-xcodebuild -workspace NotMe.xcworkspace -scheme NotMe -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,id=93364794-6476-4515-BBDD-76BC3CC9DD53' -derivedDataPath build build
+xcrun simctl list devices | grep "iPhone 17 Pro"
