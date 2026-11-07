@@ -1,1 +1,1 @@
-cd /Users/mike/Desktop/Safeguard-app-my-fix-main/frontend && grep -nA35 -B5 -E 'switchContainer|switchText|switchLink|scrollContent|scrollView' app/auth/index.tsx
+cd /Users/mike/Desktop/Safeguard-app-my-fix-main/frontend && printf '\n=== PLATFORM-SPECIFIC FILES ===\n' && find app src plugins -type f \( -name '*.android.*' -o -name '*.ios.*' \) 2>/dev/null && printf '\n=== PLATFORM CONDITIONALS ===\n' && grep -RniE 'Platform\.OS|Platform\.select|isAndroid|isIOS|ANDROID|IOS' app src plugins --exclude-dir=node_modules 2>/dev/null
