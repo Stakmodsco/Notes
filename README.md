@@ -1,7 +1,17 @@
-mike@Mikes-MacBook-Pro Desktop % brew install gh
-==> Downloading Homebrew API data
-✔︎ JSON API packages.tahoe.jws.json                                           Downloaded   15.7MB/ 15.7MB
-Error: Cannot install under Rosetta 2 in ARM default prefix (/opt/homebrew)!
-To rerun under ARM use:
-    arch -arm64 brew install ...
-To install under x86_64, install Homebrew into /usr/local.
+cd /Users/mike/Desktop
+
+gh auth status
+
+git clone https://github.com/Stakmodsco/Safeguard-app-my-fix.git NotMe-main
+
+cd NotMe-main
+
+git switch main
+
+git pull origin main
+
+printf "\n=== LATEST COMMIT ===\n"
+git log -1 --oneline
+
+printf "\n=== GIT STATUS ===\n"
+git status
