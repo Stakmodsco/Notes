@@ -1,1 +1,1 @@
-xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/NotMe.app
+xcrun simctl get_app_container booted com.filaend.safeguard app
