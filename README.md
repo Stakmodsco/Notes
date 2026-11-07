@@ -1,1 +1,3 @@
-https://nodejs.org/en/download?utm_source=chatgpt.com
+node -v
+npm -v
+npx -v
