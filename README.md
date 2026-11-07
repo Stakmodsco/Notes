@@ -1,16 +1,17 @@
+Logged in
+mike@Mikes-MacBook-Pro frontend % npx eas-cli whoami
+stakmodsco
+stakmodsco@gmail.com
+
+Accounts:
+• stakmodsco (Role: Owner)
+• filaend (Role: Developer)
 mike@Mikes-MacBook-Pro frontend % npx eas-cli env:list --environment production
-Need to install the following packages:
-eas-cli@27.5.0
-Ok to proceed? (y) y
-npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
-npm warn deprecated rimraf@2.4.5: Rimraf versions prior to v4 are no longer supported
-npm warn deprecated http-call@5.3.0: Renamed to @heroku/http-call — please install @heroku/http-call instead.
-npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
-npm warn deprecated glob@6.0.4: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
-npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
-npm warn deprecated uuid@7.0.3: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
-npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
-npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
-An Expo user account is required to proceed.
-Either log in with eas login or set the EXPO_TOKEN environment variable if you're using EAS CLI on CI (Learn more: https://docs.expo.dev/accounts/programmatic-access/)
-    Error: env:list command failed.
+
+Environment: production
+EXPO_PUBLIC_BACKEND_URL=https://safeguard-api-rtiu.onrender.com
+EXPO_PUBLIC_ENV=production
+EXPO_PUBLIC_REVENUECAT_ANDROID_KEY=goog_pSPzcrvJlgPWxtMOjAsCLyfNUWE
+EXPO_PUBLIC_REVENUECAT_IOS_KEY=appl_givPXVwkNPJDvtEYsyCaIBDjFKx
+EXPO_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_PRWvdsx_y-7Fwrp6sPbg4g_iei9FEvj
+EXPO_PUBLIC_SUPABASE_URL=https://trqfppifgddzcpflamyr.supabase.co
