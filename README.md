@@ -1,3 +1,7 @@
-git -C /opt/homebrew status --short --branch
+mike@Mikes-MacBook-Pro frontend % git -C /opt/homebrew status --short --branch
 
-git -C /opt/homebrew remote -v
+## stable
+mike@Mikes-MacBook-Pro frontend % git -C /opt/homebrew remote -v
+
+origin	https://github.com/Homebrew/brew (fetch)
+origin	https://github.com/Homebrew/brew (push)
