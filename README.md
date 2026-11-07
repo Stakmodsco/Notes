@@ -1,87 +1,16 @@
-mike@Mikes-MacBook-Pro frontend % sed -n '1,240p' scripts/public-config-guard.cjs
-/* Build-time guard: public values are bundled into the app binary. */
-const forbiddenName = /(?:SERVICE_ROLE|SECRET|PRIVATE_KEY|MASTER_KEY|DB_PASSWORD|DATABASE_URL|OPENAI_API_KEY|ANTHROPIC_API_KEY)/i;
-function assertPublicConfig(env, extra = {}) {
-  const publicValues = { ...Object.fromEntries(Object.entries(env).filter(([key]) => key.startsWith('EXPO_PUBLIC_'))), ...extra };
-  for (const [name, value] of Object.entries(publicValues)) {
-    if (!value) continue;
-    if (forbiddenName.test(name)) throw new Error(`Server-only configuration cannot be bundled: ${name}`);
-    if (typeof value === 'object') { assertPublicConfig({}, value); continue; }
-    if (typeof value !== 'string') continue;
-    if (/^(?:sb_secret_|sk_live_|sk_test_|sk-proj-|sk-ant-)/.test(value)) {
-      throw new Error(`Secret-looking value rejected in public configuration: ${name}`);
-    }
-    const parts = value.split('.');
-    if (parts.length === 3) {
-      let role;
-      try { role = JSON.parse(Buffer.from(parts[1], 'base64url').toString()).role; } catch {}
-      if (role === 'service_role') throw new Error(`Service-role key rejected in public configuration: ${name}`);
-    }
-  }
-}
-module.exports = { assertPublicConfig };
-mike@Mikes-MacBook-Pro frontend % cat eas.json
-{
-  "cli": {
-    "version": ">= 16.0.0",
-    "appVersionSource": "remote"
-  },
-  "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "environment": "development",
-      "ios": {
-        "simulator": false,
-        "resourceClass": "m-medium"
-      }
-    },
-    "development-simulator": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "environment": "development",
-      "ios": {
-        "simulator": true
-      }
-    },
-    "preview": {
-      "distribution": "internal",
-      "environment": "preview",
-      "ios": {
-        "simulator": false
-      },
-      "android": {
-        "buildType": "apk"
-      }
-    },
-    "testflight": {
-      "distribution": "store",
-      "autoIncrement": true,
-      "environment": "production",
-      "ios": {
-        "resourceClass": "m-medium",
-        "image": "auto"
-      }
-    },
-    "production": {
-      "distribution": "store",
-      "autoIncrement": true,
-      "environment": "production",
-      "ios": {
-        "resourceClass": "m-medium",
-        "image": "auto"
-      },
-      "android": {
-        "buildType": "app-bundle"
-      }
-    }
-  },
-  "submit": {
-    "testflight": {
-      "ios": {
-        "ascAppId": "6772747592"
-      }
-    }
-  }
-}
-mike@Mikes-MacBook-Pro frontend % 
+mike@Mikes-MacBook-Pro frontend % npx eas-cli env:list --environment production
+Need to install the following packages:
+eas-cli@27.5.0
+Ok to proceed? (y) y
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated rimraf@2.4.5: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated http-call@5.3.0: Renamed to @heroku/http-call — please install @heroku/http-call instead.
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@6.0.4: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated uuid@7.0.3: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+An Expo user account is required to proceed.
+Either log in with eas login or set the EXPO_TOKEN environment variable if you're using EAS CLI on CI (Learn more: https://docs.expo.dev/accounts/programmatic-access/)
+    Error: env:list command failed.
