@@ -1,39 +1,44 @@
-mike@Mikes-MacBook-Pro frontend % which pod && pod --version
-/usr/local/bin/pod
-Ignoring ffi-1.15.5 because its extensions are not built. Try: gem pristine ffi --version 1.15.5
-
----------------------------------------------
-Error loading plugin file `/Library/Ruby/Gems/2.6.0/gems/cocoapods-keys-2.2.1/lib/cocoapods_plugin.rb`.
-
-LoadError - dlopen(/Users/mike/.ruby_inline/ruby-2.6.0/Inline_OSXKeychain_5b2f8d1cd1bde9c4ff3fea49f09cd5c1.bundle, 0x0009): tried: '/Users/mike/.ruby_inline/ruby-2.6.0/Inline_OSXKeychain_5b2f8d1cd1bde9c4ff3fea49f09cd5c1.bundle' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')), '/System/Volumes/Preboot/Cryptexes/OS/Users/mike/.ruby_inline/ruby-2.6.0/Inline_OSXKeychain_5b2f8d1cd1bde9c4ff3fea49f09cd5c1.bundle' (no such file), '/Users/mike/.ruby_inline/ruby-2.6.0/Inline_OSXKeychain_5b2f8d1cd1bde9c4ff3fea49f09cd5c1.bundle' (mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e' or 'arm64e.v1' or 'arm64' or 'arm64')) - /Users/mike/.ruby_inline/ruby-2.6.0/Inline_OSXKeychain_5b2f8d1cd1bde9c4ff3fea49f09cd5c1.bundle
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-/Library/Ruby/Gems/2.6.0/gems/RubyInline-3.12.6/lib/inline.rb:521:in `load'
-/Library/Ruby/Gems/2.6.0/gems/RubyInline-3.12.6/lib/inline.rb:855:in `inline'
-/Library/Ruby/Gems/2.6.0/gems/osx_keychain-1.0.2/lib/osx_keychain.rb:17:in `<class:OSXKeychain>'
-/Library/Ruby/Gems/2.6.0/gems/osx_keychain-1.0.2/lib/osx_keychain.rb:6:in `<top (required)>'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-keys-2.2.1/lib/keyring.rb:1:in `<top (required)>'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:130:in `require'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:130:in `rescue in require'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:34:in `require'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-keys-2.2.1/lib/cocoapods_plugin.rb:1:in `<top (required)>'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command/plugin_manager.rb:92:in `block in safe_require'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command/plugin_manager.rb:90:in `each'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command/plugin_manager.rb:90:in `safe_require'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command/plugin_manager.rb:31:in `block in load_plugins'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command/plugin_manager.rb:30:in `map'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command/plugin_manager.rb:30:in `load_plugins'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command.rb:326:in `block in run'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command.rb:325:in `each'
-/Library/Ruby/Gems/2.6.0/gems/claide-1.1.0/lib/claide/command.rb:325:in `run'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.11.3/lib/cocoapods/command.rb:52:in `run'
-/Library/Ruby/Gems/2.6.0/gems/cocoapods-1.11.3/bin/pod:55:in `<top (required)>'
-/usr/local/bin/pod:23:in `load'
-/usr/local/bin/pod:23:in `<main>'
----------------------------------------------
-
-1.11.3
+mike@Mikes-MacBook-Pro frontend % gem env
+RubyGems Environment:
+  - RUBYGEMS VERSION: 4.0.23
+  - RUBY VERSION: 4.0.9 (2026-10-23 patchlevel 0) [arm64-darwin25]
+  - INSTALLATION DIRECTORY: /opt/homebrew/lib/ruby/gems/4.0.0
+  - USER INSTALLATION DIRECTORY: /Users/mike/.gem/ruby/4.0.0
+  - CREDENTIALS FILE: /Users/mike/.local/share/gem/credentials
+  - RUBY EXECUTABLE: /opt/homebrew/opt/ruby/bin/ruby
+  - GIT EXECUTABLE: /usr/bin/git
+  - EXECUTABLE DIRECTORY: /opt/homebrew/lib/ruby/gems/4.0.0/bin
+  - SPEC CACHE DIRECTORY: /Users/mike/.gem/specs
+  - SYSTEM CONFIGURATION DIRECTORY: /opt/homebrew/Cellar/ruby/4.0.9/etc
+  - RUBYGEMS PLATFORMS:
+     - ruby
+     - arm64-darwin-25
+  - GEM PATHS:
+     - /opt/homebrew/lib/ruby/gems/4.0.0
+     - /Users/mike/.gem/ruby/4.0.0
+     - /opt/homebrew/Cellar/ruby/4.0.9/lib/ruby/gems/4.0.0
+  - GEM CONFIGURATION:
+     - :update_sources => true
+     - :verbose => true
+     - :backtrace => true
+     - :bulk_threshold => 1000
+  - REMOTE SOURCES:
+     - https://rubygems.org/
+  - SHELL PATH:
+     - /opt/homebrew/opt/ruby/bin
+     - /Users/mike/.npm-global/bin
+     - /Users/mike/.npm-global/bin
+     - /Users/mike/.npm-global/bin
+     - /opt/homebrew/bin
+     - /opt/homebrew/sbin
+     - /usr/local/bin
+     - /usr/bin
+     - /bin
+     - /usr/sbin
+     - /sbin
+     - /users/mike/bin
+     - /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin
+     - /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin
+     - /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+     - /pkg/env/global/bin
+     - /Library/Apple/usr/bin
