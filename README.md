@@ -1,2 +1,2 @@
-mike@Mikes-MacBook-Pro frontend % git status --short
-fatal: not a git repository (or any of the parent directories): .git
+cd /Users/mike/Desktop/Safeguard-app-my-fix-main
+ls -la
