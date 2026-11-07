@@ -1,3 +1,60 @@
-mike@Mikes-MacBook-Pro frontend % ls -la .env*
+mike@Mikes-MacBook-Pro frontend % touch .env  
+mike@Mikes-MacBook-Pro frontend % nano .env
 
--rw-r--r--@ 1 mike  staff  1239 Oct 20 00:37 .env.example
+  UW PICO 5.09                                   File: .env                                    Modified  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+^G Get Help      ^O WriteOut      ^R Read File     ^Y Prev Pg       ^K Cut Text      ^C Cur Pos
+^X Exit          ^J Justify       ^W Where is      ^V Next Pg       ^U UnCut Text    ^T To Spell
+
+
+
+
+
+
+^G Get Help      ^O WriteOut      ^R Read File     ^Y Prev Pg       ^K Cut Text      ^C Cur Pos       
+^X Exit          ^J Justify       ^W Where is      ^V Next Pg       ^U UnCut Text    ^T To Spell      
