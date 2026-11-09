@@ -1,3 +1,2 @@
-cd ~/Downloads
-ipconfig getifaddr en0
-python3 -m http.server 8000 --bind 0.0.0.0
+cd /Users/mike/Desktop/NotMe-main/frontend
+grep -RniE "reminder.*(day|week|month)|days.*weeks|weeks.*months" app src components --include="*.tsx" --include="*.ts" 2>/dev/null | head -60
