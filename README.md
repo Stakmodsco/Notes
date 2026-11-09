@@ -1,2 +1,1 @@
-set -o pipefail
-xcodebuild clean build -workspace NotMe.xcworkspace -scheme NotMe -configuration Debug -destination 'platform=iOS Simulator,id=93364794-6476-4515-BBDD-76BC3CC9DD53' -derivedDataPath build/DerivedData 2>&1 | grep -E 'error:|BUILD SUCCEEDED|BUILD FAILED'
+xcrun simctl install booted /Users/mike/Desktop/NotMe-main/frontend/ios/build/DerivedData/Build/Products/Debug-iphonesimulator/NotMe.app && xcrun simctl terminate booted com.filaend.safeguard 2>/dev/null; xcrun simctl launch booted com.filaend.safeguard
